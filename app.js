@@ -20,6 +20,13 @@ const grid = document.querySelector("#selectionGrid");
 const profile = document.querySelector("#profileLayer");
 const profileArt = document.querySelector("#profileArt");
 const activePortrait = document.querySelector("#activePortrait");
+const assetButton = document.querySelector("#assetButton");
+const assetDialog = document.querySelector("#assetDialog");
+const closeDialog = document.querySelector("#closeDialog");
+const candidatePicker = document.querySelector("#candidatePicker");
+const panelFile = document.querySelector("#panelFile");
+const previewPanel = document.querySelector("#previewPanel");
+const uploadStatus = document.querySelector("#uploadStatus");
 const columns = 5;
 let selectedIndex = 1;
 
@@ -41,7 +48,46 @@ function renderGrid() {
   grid.querySelectorAll(".selection-slot").forEach((slot) => {
     slot.addEventListener("click", () => selectCandidate(Number(slot.dataset.index)));
   });
+
+  candidatePicker.innerHTML = candidates.map((candidate, index) => `<option value="${index}">${candidate.name}</option>`).join("");
 }
+
+assetButton.addEventListener("click", () => {
+  candidatePicker.value = String(selectedIndex);
+  panelFile.value = "";
+  uploadStatus.textContent = "";
+  assetDialog.showModal();
+});
+
+closeDialog.addEventListener("click", () => assetDialog.close());
+
+previewPanel.addEventListener("click", () => {
+  const file = panelFile.files[0];
+  if (!file) {
+    uploadStatus.textContent = "Selecione um arquivo PNG para pré-visualizar.";
+    return;
+  }
+  if (file.type !== "image/png") {
+    uploadStatus.textContent = "Use um arquivo PNG com transparência.";
+    return;
+  }
+  const target = Number(candidatePicker.value);
+  const reader = new FileReader();
+  reader.addEventListener("load", () => {
+    const panel = new Image();
+    panel.addEventListener("load", () => {
+      if (panel.naturalWidth !== 1920 || panel.naturalHeight !== 1080) {
+        uploadStatus.textContent = "O painel precisa medir exatamente 1920 × 1080 px.";
+        return;
+      }
+      candidates[target].art = reader.result;
+      selectCandidate(target);
+      assetDialog.close();
+    });
+    panel.src = reader.result;
+  });
+  reader.readAsDataURL(file);
+});
 
 function selectCandidate(index) {
   selectedIndex = index;

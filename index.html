@@ -20,7 +20,27 @@
           <img id="profileArt" src="assets/saulo-pedroso.png" alt="Saulo Pedroso, Deputado Federal, número 5515" />
           <span class="profile-sheen" aria-hidden="true"></span>
         </div>
+
+        <button id="assetButton" class="asset-button" type="button" aria-label="Adicionar arte de candidato" title="Adicionar arte de candidato">
+          <svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="18"/><path d="m24 13 7 5-3 8h-8l-3-8zM17 18l-5 6 3 8m16-14 5 6-3 8M20 26l-4 9m12-9 4 9m-12 0h8"/></svg>
+        </button>
       </div>
+
+      <dialog id="assetDialog" class="asset-dialog" aria-labelledby="assetDialogTitle">
+        <form id="assetForm" method="dialog">
+          <div class="dialog-header">
+            <div><p>ARTE DO JOGADOR</p><h2 id="assetDialogTitle">Adicionar painel</h2></div>
+            <button id="closeDialog" class="close-dialog" type="button" aria-label="Fechar">×</button>
+          </div>
+          <label for="candidatePicker">Candidato</label>
+          <select id="candidatePicker"></select>
+          <label for="panelFile">Painel PNG</label>
+          <input id="panelFile" type="file" accept="image/png" />
+          <p class="upload-help">Use PNG com transparência, 1920 × 1080, sem recortar a tela. Exporte o painel completo exatamente na mesma posição da arte do Saulo.</p>
+          <p id="uploadStatus" class="upload-status" aria-live="polite"></p>
+          <div class="dialog-actions"><button id="previewPanel" class="preview-button" type="button">Pré-visualizar</button></div>
+        </form>
+      </dialog>
     </main>
     <script src="app.js"></script>
   </body>
