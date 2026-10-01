@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Escalação — Time de Palmital</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="screen" aria-label="Escalação do Time de Palmital">
+      <div class="artboard">
+        <img class="layer layer-background" src="assets/fundo.jpg" alt="" />
+        <img class="layer layer-title" src="assets/texto.png" alt="Escalação Time de Palmital — Eleições 2026" />
+        <img class="layer layer-grid" src="assets/grade.png" alt="Grade de candidatos" />
+
+        <div id="selectionGrid" class="selection-grid" role="listbox" aria-label="Candidatos disponíveis"></div>
+        <div id="activePortrait" class="active-portrait" aria-hidden="true"></div>
+
+        <div id="profileLayer" class="profile-layer" aria-live="polite">
+          <img id="profileArt" src="assets/saulo-pedroso.png" alt="Saulo Pedroso, Deputado Federal, número 5515" />
+          <span class="profile-sheen" aria-hidden="true"></span>
+        </div>
+      </div>
+    </main>
+    <script src="app.js"></script>
+  </body>
+</html>

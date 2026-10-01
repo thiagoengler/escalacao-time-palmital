@@ -1,0 +1,46 @@
+:root { color-scheme: dark; }
+* { box-sizing: border-box; }
+html, body { width: 100%; height: 100%; margin: 0; background: #031907; overflow: hidden; }
+body { display: grid; place-items: center; }
+
+.screen { position: relative; width: 100vw; height: 100vh; display: grid; place-items: center; overflow: hidden; }
+.screen::before { content: ""; position: fixed; inset: 0; z-index: 0; background: linear-gradient(rgba(0, 23, 5, .62), rgba(0, 23, 5, .62)), url("assets/fundo.jpg") center / cover no-repeat; transform: scale(1.06); filter: saturate(.82) brightness(.58); }
+.artboard { position: relative; z-index: 1; width: min(100vw, 177.777777vh); aspect-ratio: 16 / 9; overflow: hidden; background: #047c0d; isolation: isolate; box-shadow: 0 0 55px rgba(0, 0, 0, .55); }
+.layer, .profile-layer { position: absolute; inset: 0; width: 100%; height: 100%; }
+.layer { display: block; object-fit: fill; user-select: none; pointer-events: none; }
+.layer-background { z-index: 0; }
+.layer-title { z-index: 1; }
+.layer-grid { z-index: 2; }
+
+/* A grade é a arte exportada do Photoshop. Os botões são invisíveis: servem apenas
+   para deslocar o destaque sem alterar um único pixel da arte original. */
+.selection-grid { position: absolute; z-index: 1; left: 9.05%; top: 28.15%; width: 46.15%; height: 58.25%; display: grid; grid-template-columns: repeat(5, 1fr); grid-template-rows: repeat(3, 1fr); column-gap: 2.25%; row-gap: 2.45%; }
+.selection-slot { position: relative; padding: 0; cursor: pointer; border: 0; border-radius: 50%; background: transparent; outline: none; transition: transform 180ms cubic-bezier(.2,.85,.25,1); }
+.selection-slot::before, .selection-slot::after { content: ""; position: absolute; pointer-events: none; border-radius: 50%; opacity: 0; transition: opacity 120ms ease, transform 180ms cubic-bezier(.2,.85,.25,1); }
+.selection-slot::before { inset: 18% 1% 1%; border: clamp(2px, .22vw, 5px) solid #fff; box-shadow: 0 0 0 clamp(3px, .3vw, 6px) #ffdb00, 0 0 clamp(10px, 1vw, 22px) rgba(255, 221, 0, .88); transform: scale(.88); }
+.selection-slot::after { inset: 11% -6% -6%; border: 1px solid rgba(255, 239, 113, .82); transform: scale(.7); }
+.selection-slot.is-selected { transform: scale(1.055); z-index: 2; }
+.selection-slot.is-selected::before, .selection-slot.is-selected::after { opacity: 1; transform: scale(1); }
+.selection-slot.is-selected::before { animation: selected-pulse 1.55s ease-in-out infinite; }
+.selection-slot:hover::before, .selection-slot:focus-visible::before { opacity: 1; transform: scale(.96); }
+@keyframes selected-pulse { 50% { box-shadow: 0 0 0 clamp(4px, .42vw, 9px) rgba(255, 219, 0, .36), 0 0 clamp(14px, 1.8vw, 35px) rgba(255, 221, 0, .95); } }
+
+/* É uma cópia recortada da pessoa escolhida: ela cresce sobre a grade,
+   enquanto o anel de seleção continua atrás dela. */
+.active-portrait { position: absolute; z-index: 3; pointer-events: none; transform-origin: 50% 56%; transition: left 180ms cubic-bezier(.2,.85,.25,1), top 180ms cubic-bezier(.2,.85,.25,1), transform 230ms cubic-bezier(.16,.86,.23,1); }
+.active-portrait img { display: block; width: 100%; height: 100%; object-fit: fill; }
+.active-portrait.is-active { transform: scale(1.085); animation: portrait-pop 280ms cubic-bezier(.16,.86,.23,1); }
+@keyframes portrait-pop { from { opacity: .55; transform: scale(.94); } to { opacity: 1; transform: scale(1.085); } }
+
+/* O painel da direita é também a arte exportada. A troca apenas anima a camada,
+   preservando o enquadramento, as fontes e os elementos feitos no Photoshop. */
+.profile-layer { z-index: 4; pointer-events: none; }
+.profile-layer img { display: block; width: 100%; height: 100%; object-fit: fill; transform-origin: 75% 55%; animation: profile-float 4.8s ease-in-out infinite; }
+.profile-layer.is-changing { animation: profile-enter 420ms cubic-bezier(.16,.86,.23,1) both; }
+.profile-sheen { position: absolute; top: 22.5%; left: 59%; width: 29%; height: 40%; overflow: hidden; border-radius: 7px; mix-blend-mode: screen; opacity: .32; }
+.profile-sheen::after { content: ""; position: absolute; inset: -30% auto -30% -48%; width: 32%; transform: skewX(-19deg); background: linear-gradient(90deg, transparent, rgba(255,255,255,.9), transparent); animation: sheen 5.8s ease-in-out infinite; }
+@keyframes profile-enter { from { opacity: .1; transform: translate3d(2.1%, 0, 0) scale(.985); } 58% { opacity: 1; transform: translate3d(-.25%, 0, 0) scale(1.005); } to { opacity: 1; transform: none; } }
+@keyframes profile-float { 0%, 100% { transform: translate3d(0, 0, 0) scale(1); } 50% { transform: translate3d(-.2%, -.65%, 0) scale(1.018); } }
+@keyframes sheen { 0%, 65% { transform: translateX(0) skewX(-19deg); opacity: 0; } 72% { opacity: 1; } 90%,100% { transform: translateX(560%) skewX(-19deg); opacity: 0; } }
+
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; } }
