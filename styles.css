@@ -33,11 +33,10 @@ body { display: grid; place-items: center; }
 @keyframes portrait-pop { from { opacity: .55; transform: scale(.94); } to { opacity: 1; transform: scale(1.085); } }
 
 .game-hints { position: absolute; z-index: 3; left: 8.9%; bottom: 3.2%; display: flex; align-items: center; gap: clamp(13px, 1.25vw, 25px); color: #fff; font: 800 clamp(9px, .78vw, 15px)/1 Arial, sans-serif; letter-spacing: .07em; text-transform: uppercase; text-shadow: 0 2px 3px rgba(0,0,0,.65); }
-.game-hint { display: inline-flex; align-items: center; gap: clamp(5px, .38vw, 8px); white-space: nowrap; }
-.ps-shape { display: grid; width: clamp(16px, 1.45vw, 28px); height: clamp(16px, 1.45vw, 28px); place-items: center; color: #fff; font: 800 clamp(15px, 1.35vw, 26px)/1 Arial, sans-serif; font-style: normal; letter-spacing: 0; }
-.ps-cross { font-size: clamp(21px, 1.85vw, 35px); font-weight: 500; }
-.ps-circle { font-size: clamp(23px, 2vw, 38px); font-weight: 400; }
-.ps-arrows { width: clamp(28px, 2.5vw, 48px); font-size: clamp(13px, 1.08vw, 20px); letter-spacing: -.16em; }
+.game-hint { display: inline-flex; align-items: center; gap: clamp(5px, .38vw, 8px); min-height: clamp(16px, 1.45vw, 28px); white-space: nowrap; }
+.game-hint > span { display: block; line-height: 1; }
+.ps-icon { display: block; flex: 0 0 auto; width: clamp(16px, 1.45vw, 28px); height: clamp(16px, 1.45vw, 28px); overflow: visible; fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; stroke-width: 3; }
+.ps-icon.ps-arrows { width: clamp(28px, 2.5vw, 48px); }
 
 /* O painel da direita é também a arte exportada. A troca apenas anima a camada,
    preservando o enquadramento, as fontes e os elementos feitos no Photoshop. */
