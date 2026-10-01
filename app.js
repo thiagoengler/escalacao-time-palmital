@@ -1,6 +1,6 @@
 const candidates = [
   { name: "Luis Gustavo", number: "10", office: "Prefeito", art: "assets/paineis/luis-gustavo.png" },
-  { name: "Saulo Pedroso", number: "5515", office: "Deputado Federal", art: "assets/paineis/saulo-pedroso.png" },
+  { name: "Saulo Pedroso", number: "5515", office: "Deputado Federal", art: "assets/paineis/saulo-pedroso-v2.png" },
   { name: "Eleuses Paiva Filho", number: "5555", office: "Deputado Federal", art: "assets/paineis/eleuses-paiva.png" },
   { name: "Marco Vinholi", number: "1002", office: "Deputado Federal", art: "assets/paineis/marco-vinholi.png" },
   { name: "Vitor Lippi", number: "5501", office: "Deputado Federal", art: "assets/paineis/vitor-lippi.png" },
